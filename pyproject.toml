@@ -16,6 +16,7 @@ dependencies = [
 
 [project.scripts]
 process_data = "clinical_cool_etud.process_data:main"
+correct_data = "clinical_cool_etud.correct_data:main"
 
 [build-system]
 requires = ["hatchling"]
