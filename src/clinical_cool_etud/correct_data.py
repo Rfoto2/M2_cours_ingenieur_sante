@@ -73,9 +73,10 @@ def impute_categorical_variables(df):
             df.update(df[col].fillna(df[col].mode()[0]))
     return df
 
-def replace_label_1_by_0_and_2_by_1(df):
+def replace_label_2_by_0(df):
     """
-    Remplace les valeurs 1 par 0 et les valeurs 2 par 1 pour la colonne "label" du DataFrame passé en paramètre de la fonction.
+    Remplace les valeurs 2 par 0 pour la colonne "label" du DataFrame passé en paramètre de la fonction.
+    Permet de rassembler les patients censurés et transplantés (les deux sont vivants)
 
     Parameters:
         df (pd.DataFrame): Le DataFrame contenant les données de cbp, avec une colonne 'label' à corriger.
@@ -83,8 +84,7 @@ def replace_label_1_by_0_and_2_by_1(df):
     Returns:
         pd.DataFrame: Le DataFrame après remplacement des valeurs dans la colonne 'label'.
     """
-    df.loc[df['label'] == 1, 'label'] = 0
-    df.loc[df['label'] == 2, 'label'] = 1
+    df.loc[df['label'] == 2, 'label'] = 0
     return df
 
 
@@ -95,7 +95,7 @@ def main():
     df = remove_date_diag(df)
     df = impute_continuous_variables(df)
     df = impute_categorical_variables(df)
-    df = replace_label_1_by_0_and_2_by_1(df)
+    df = replace_label_2_by_0(df)
     df.to_csv(DATA_DIR / "clinical_data_pbc_cleaned.csv", index=False)
 
 
