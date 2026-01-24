@@ -1,5 +1,5 @@
+
 import numpy as np
-#from clinical_cool_etud.config import DATA_DIR
 from clinical_cool_etud.config import DATA_DIR
 #from config import DATA_DIR
 
@@ -140,13 +140,8 @@ def main():
     # Dictionnaire de mapping pour avoir les légendes des statuts.
     status_map = {
         0: 'Censuré (Vivant)',
-<<<<<<< HEAD
-        1: 'Transplanté',
-        2: 'Décédé'
-=======
         1: 'Décédé',
         2: 'Transplanté'
->>>>>>> upstream/main
     }
 
     # On crée une colonne avec les noms explicites pour le graphique
@@ -156,11 +151,7 @@ def main():
     # Distribution des statuts
     plt.figure(figsize=(8, 5))
     ax = sns.countplot(data=dataframe_clinical_data_copy_last, x='event_label', palette='viridis',
-<<<<<<< HEAD
-                       order=['Censuré (Vivant)', 'Transplanté', 'Décédé'])
-=======
                        order=['Censuré (Vivant)', 'Décédé', 'Transplanté'])
->>>>>>> upstream/main
 
     plt.title('Répartition des patients par statut final')
     plt.xlabel('Statut')
@@ -179,11 +170,7 @@ def main():
         data=dataframe_clinical_data_copy_last,
         x='tte',
         hue='event_label',
-<<<<<<< HEAD
-        hue_order=['Censuré (Vivant)', 'Transplanté', 'Décédé'],
-=======
         hue_order=['Censuré (Vivant)', 'Décédé', 'Transplanté'],
->>>>>>> upstream/main
         element="step",
         palette='viridis',
         alpha=0.3  # Transparence pour voir les superpositions
