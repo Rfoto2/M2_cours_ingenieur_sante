@@ -12,10 +12,12 @@ dependencies = [
     "numpy>=2.4.0",
     "pandas>=2.3.3",
     "seaborn>=0.13.2",
+    "torch>=2.9.1",
 ]
 
 [project.scripts]
 process_data = "clinical_cool_etud.process_data:main"
+correct_data = "clinical_cool_etud.correct_data:main"
 
 [build-system]
 requires = ["hatchling"]
