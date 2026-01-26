@@ -20,6 +20,7 @@ dependencies = [
 process_data = "clinical_cool_etud.process_data:main"
 correct_data = "clinical_cool_etud.correct_data:main"
 run_model = "clinical_cool_etud.main:main"
+training = "clinical_cool_etud.training:main"
 
 [build-system]
 requires = ["hatchling"]
