@@ -11,6 +11,7 @@ dependencies = [
     "matplotlib>=3.10.8",
     "numpy>=2.4.0",
     "pandas>=2.3.3",
+    "scikit-learn>=1.8.0",
     "seaborn>=0.13.2",
     "torch>=2.9.1",
 ]
@@ -18,6 +19,7 @@ dependencies = [
 [project.scripts]
 process_data = "clinical_cool_etud.process_data:main"
 correct_data = "clinical_cool_etud.correct_data:main"
+run_model = "clinical_cool_etud.main:main"
 
 [build-system]
 requires = ["hatchling"]
