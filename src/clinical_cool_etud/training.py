@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import torch
 
+
 from clinical_cool_etud.NLLsurv import NLLSurvLoss
 from clinical_cool_etud.config import DATA_DIR
 from clinical_cool_etud.model import LSTM_risk_estimator
@@ -108,3 +109,32 @@ def main():
     plt.legend()
     plt.grid(True)
     plt.show()
+    # =========================
+    # ÉVALUATION : C-INDEX
+    # =========================
+
+    from sksurv.metrics import concordance_index_ipcw
+
+    model.eval()  # mode évaluation (important)
+
+    with torch.no_grad():
+        # Prédictions sur le jeu de test
+        probs_test = model(X_test)  # (n_patients, n_time_steps)
+
+    # Conversion des labels train et test au format scikit-survival
+    y_train_sksurv = to_sksurv_format(Y_train)
+    y_test_sksurv = to_sksurv_format(Y_test)
+
+    # Calcul du risque cumulatif jusqu'à tau
+    tau = 400
+    cumulative_risk = probs_test[:, :tau].sum(dim=1).cpu().numpy()
+
+    # Calcul du C-index IPCW
+    c_index, _ = concordance_index_ipcw(
+        y_train_sksurv,
+        y_test_sksurv,
+        cumulative_risk,
+        tau=tau
+    )
+
+    print(f"C-index sur le jeu de test (tau = {tau}) : {c_index:.3f}")
